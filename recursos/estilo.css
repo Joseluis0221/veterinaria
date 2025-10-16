@@ -1,0 +1,83 @@
+.btn-menu {
+  padding: .5rem .75rem;
+  border-radius: .375rem;
+  transition: background .2s;
+}
+.btn-menu:hover {
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+}
+.seccion.oculto {
+  display: none;
+}
+
+
+/* Estilos para el menú desplegable */
+/* --- Estilos calendario y lista de citas (mejor visual) --- */
+#calendarioCitas {
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.75rem;
+  padding: 0.5rem;
+}
+#calendarioCitas > div {
+  box-sizing: border-box;
+}
+/* cabecera días */
+#calendarioCitas .text-sm.font-semibold { padding: .5rem 0; }
+/* celdas de día */
+#calendarioCitas .p-3 {
+  background: white;
+  border-radius: .6rem;
+  border: 1px solid #f1f5f9;
+  min-height: 64px;
+  padding: .6rem;
+}
+/* día con citas */
+.bg-purple-50 { background-color: #f5f3ff !important; }
+/* badge contador en día */
+#calendarioCitas .rounded-full { font-weight: 700; }
+/* botones mes */
+#prevMes, #nextMes { background: transparent; border: 1px solid transparent; padding: .25rem .5rem; border-radius: .375rem; }
+#prevMes:hover, #nextMes:hover { background: #f3f4f6; }
+
+/* lista próximas citas tarjetas */
+#listaCitas .border { background: #fff; }
+#listaCitas .font-semibold { margin-bottom: 3px; }
+
+/* responsive */
+@media (max-width: 768px) {
+  #calendarioCitas .p-3 { min-height: 56px; }
+}
+
+/* --- Efecto sombra al pasar el mouse por un día del calendario --- */
+#calendarioCitas .p-3 {
+  background: white;
+  border-radius: .6rem;
+  border: 1px solid #f1f5f9;
+  min-height: 64px;
+  padding: .6rem;
+  transition: all 0.3s ease-in-out; /* animación suave */
+}
+
+#calendarioCitas .p-3:hover {
+  transform: translateY(-3px); /* se levanta un poco */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18); /* sombra sutil */
+  background-color: #fafafa;
+  border-color: #e5e7eb;
+}
+
+
+
+#listaMascotas {
+  margin-top: 1rem;
+}
+
+#listaMascotas .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#listaMascotas .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+

@@ -1,15 +1,46 @@
 .btn-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   padding: .5rem .75rem;
-  border-radius: .375rem;
-  transition: background .2s;
+  border-radius: .5rem;
+  color: #374151; /* slate-700 */
+  transition: background .2s, color .2s;
 }
 .btn-menu:hover {
-  background-color: #e0e7ff;
-  color: #1e3a8a;
+  background-color: #e0e7ff; /* indigo-100 */
+  color: #1e40af; /* indigo-800 */
 }
+.btn-menu.active {
+  background-color: #eff6ff; /* blue-50 */
+  color: #1e40af; /* indigo-800 */
+}
+.btn-menu svg { flex-shrink: 0; color: currentColor; }
+.btn-menu .icon-img { width: 20px; height: 20px; display: block; object-fit: contain; flex-shrink: 0; }
+.btn-menu .icon-mask { width: 20px; height: 20px; display: inline-block; background-color: currentColor; flex-shrink: 0; vertical-align: middle;
+  -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
+  mask-repeat: no-repeat; mask-position: center; mask-size: contain; }
+.icon-mask.icon-paw { -webkit-mask-image: url('https://img.icons8.com/ios-filled/50/cat-footprint.png'); mask-image: url('https://img.icons8.com/ios-filled/50/cat-footprint.png'); }
 .seccion.oculto {
   display: none;
 }
+
+/* Sidebar estilo YouTube */
+.sidebar {
+  width: 4.5rem; /* rail por defecto (móvil/tablet) */
+  transition: width .2s ease, padding .2s ease;
+}
+@media (min-width: 1024px) { /* lg */
+  .sidebar { width: 16rem; }
+  .sidebar.collapsed { width: 4.5rem; }
+}
+.sidebar.collapsed .btn-menu { justify-content: center; padding-left: .5rem; padding-right: .5rem; }
+/* Ocultar solo las etiquetas de texto cuando el sidebar está colapsado */
+.sidebar .btn-menu .label { display: none; }
+@media (min-width: 1024px) {
+  .sidebar:not(.collapsed) .btn-menu .label { display: inline; }
+}
+
 
 
 /* Estilos para el menú desplegable */
@@ -40,6 +71,30 @@
 #prevMes, #nextMes { background: transparent; border: 1px solid transparent; padding: .25rem .5rem; border-radius: .375rem; }
 #prevMes:hover, #nextMes:hover { background: #f3f4f6; }
 
+/* Estilos para encabezado del calendario (flechas pequeñas y título centrado) */
+.mes-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  color: #111827;
+  border: 1px solid transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+.mes-btn:hover { background: #f8fafc; border-color: #e6edf8; }
+
+.mes-titulo {
+  font-weight: 600;
+  color: #0f172a;
+  padding: 0 12px;
+  min-width: 160px;
+  text-align: center;
+}
+
 /* lista próximas citas tarjetas */
 #listaCitas .border { background: #fff; }
 #listaCitas .font-semibold { margin-bottom: 3px; }
@@ -66,6 +121,83 @@
   border-color: #e5e7eb;
 }
 
+/* --- Tarjetas de gráficos del dashboard --- */
+.chart-card {
+  background: #ffffff;
+  border-radius: 1rem; /* ~16px */
+  padding: 1.5rem; /* p-6 */
+  border: 1px solid #e9eef7; /* borde sutil */
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  overflow: hidden; /* asegura que el canvas respete el borde */
+}
+.chart-card canvas {
+  display: block;
+  width: 100%;
+}
+
+/* --- Barra superior (topbar) con gradiente teal/verde --- */
+.topbar {
+  /* Azul sólido solicitado: Tailwind text-blue-600 (#2563eb) */
+  background: #2563eb;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #fff;
+  transition: background .18s ease, transform .08s ease;
+}
+/* Sin efecto en hover; solo feedback al presionar */
+@media (hover: hover) and (pointer: fine) {
+  .menu-btn:hover { background: transparent; }
+}
+.menu-btn:active { background: rgba(255,255,255,0.22); box-shadow: 0 6px 18px rgba(0,0,0,0.18); transform: translateY(0); }
+.menu-btn.is-open { background: transparent; box-shadow: none; }
+.menu-btn:focus { outline: none; box-shadow: none !important; }
+.menu-btn svg { color: currentColor; }
+.btn-topbar {
+  padding: 0.5rem 0.9rem;
+  border-radius: 9999px; /* pill */
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.28);
+  transition: background .2s ease, border-color .2s ease, transform .08s ease;
+}
+.btn-topbar:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.38); }
+.btn-topbar:active { transform: translateY(1px); }
+
+/* Perfil (estilo YouTube) */
+.profile-btn {
+  width: 36px; height: 36px; border-radius: 9999px; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  transition: background .2s ease, transform .08s ease, border-color .2s ease;
+}
+.profile-btn:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.32); }
+.profile-btn:active { transform: translateY(1px); }
+
+.profile-menu {
+  box-shadow: 0 16px 40px rgba(2,6,23,0.18); border: 1px solid #eef2ff;
+  overflow: hidden;
+}
+
+/* Efecto ripple para el botón Cerrar Sesión */
+#cerrarSesion { position: relative; overflow: hidden; }
+#cerrarSesion .ripple {
+  position: absolute;
+  border-radius: 9999px;
+  transform: scale(0);
+  background: rgba(37,99,235,0.22); /* azul suave */
+  animation: topbar-ripple 450ms ease-out;
+  pointer-events: none;
+}
+@keyframes topbar-ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
 
 
 #listaMascotas {
@@ -80,4 +212,423 @@
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
+
+/* Estilos específicos para tarjetas de mascotas (vista moderna) */
+.pet-card {
+  padding: 1.25rem; /* mayor espacio interno */
+  border-radius: 0.75rem;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.03);
+}
+
+.pet-card h3 {
+  font-size: 1.125rem;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.pet-card .meta p {
+  margin: 0.35rem 0;
+  color: #4b5563;
+}
+
+.pet-card .meta .label {
+  font-weight: 700;
+  color: #111827;
+  margin-right: 0.25rem;
+}
+
+.pet-card .actions {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pet-card .icon-btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.pet-card .icon-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+
+.pet-card .icon-btn.edit svg { color: #2563eb; filter: drop-shadow(0 1px 0 rgba(37,99,235,0.06)); }
+.pet-card .icon-btn.delete svg { color: #dc2626; filter: drop-shadow(0 1px 0 rgba(220,38,38,0.04)); }
+
+/* Ajustes responsivos para el grid */
+@media (min-width: 768px) {
+  #listaMascotas { gap: 1.25rem; }
+}
+
+/* Tarjetas de Diagnósticos */
+.diagnosis-card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+  position: relative;
+  border: 1px solid rgba(15,23,42,0.03);
+  margin-bottom: 1.25rem;
+}
+.diagnosis-card h4 { font-weight: 700; color: #0f172a; margin-bottom: .5rem; }
+.diagnosis-card .meta { color: #6b7280; margin-bottom: .5rem; }
+.diagnosis-card .meta b { color: #111827; margin-right: .35rem; }
+.diagnosis-card .actions { position: absolute; top: 12px; right: 12px; display:flex; gap: .5rem; }
+.diagnosis-card .icon-btn { width:34px; height:34px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; }
+
+/* Botón nuevo diagnóstico */
+#btnNuevoDiagnostico { background: #6d28d9; color: #fff; padding: .6rem 1rem; border-radius: .6rem; box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
+#btnNuevoDiagnostico:hover { background: #5b21b6; }
+
+
+/* ---- Estilo tabla de clientes ---- */
+#clientes table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+#clientes th {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+#clientes tr:hover {
+  background-color: #f9fafb;
+  transition: background-color 0.2s ease;
+}
+
+#clientes .bg-white {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-radius: 0.75rem;
+}
+
+/* Botones */
+#btnNuevoCliente, #btnBuscarCliente {
+  transition: all 0.2s ease-in-out;
+}
+
+#btnNuevoCliente:hover, #btnBuscarCliente:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+
+/* --- Cuadro de búsqueda clientes --- */
+#clientes .relative input {
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+#clientes .relative input:focus {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+}
+
+#clientes .fa-search {
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  #clientes .relative {
+    width: 100%;
+  }
+}
+
+/* --- Buscador clientes con sombra y transición --- */
+#clientes .relative input {
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+#clientes .relative input:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  transform: scale(1.01);
+}
+
+#btnBuscarCliente:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+/* Estilos específicos para la sección 'Clientes' */
+#clientes {
+  padding-top: 0.5rem;
+}
+
+#tablaClientesContainer th {
+  background: transparent;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+#tablaClientes tr {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+#tablaClientes tr td {
+  padding: 1rem 0.75rem;
+}
+
+#tablaClientes tr:nth-child(odd) td {
+  background: transparent;
+}
+
+/* fila tarjeta dentro de la tabla (fondo blanco con sombra) */
+#tablaClientes tr {
+  background: #fff;
+}
+
+#tablaClientes tbody tr:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+/* Ajuste del input buscador y botón */
+#buscarCliente {
+  border: 1px solid #e6edf8;
+}
+
+/* Botón Agregar */
+#agregarCliente {
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+}
+
+@media (max-width: 768px) {
+  #tablaClientes tr td { padding: .6rem .5rem; }
+}
+
+/* Modal cliente: compacto, centrado y estilizado (ajustes para 'Agregar Cliente') */
+#modalCliente { display: none; }
+#modalCliente.items-center { display: flex; align-items: center; justify-content: center; }
+#modalCliente .bg-white {
+  max-height: 90vh;
+  width: 420px; /* ancho compacto similar a la imagen */
+  max-width: 92%;
+  padding: 1.1rem 1.25rem;
+  border-radius: 1rem; /* esquinas redondeadas más visibles */
+  box-shadow: 0 12px 30px rgba(2,6,23,0.12);
+  overflow: hidden;
+}
+
+/* Título del modal más destacado y centrado */
+#modalCliente h3#modalTitulo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin: 0 0 0.6rem 0;
+  color: #0f172a;
+  text-align: center; /* centrado solicitado */
+}
+
+/* Formularios y campos dentro del modal */
+#modalCliente form { margin: 0; }
+#modalCliente input, #modalCliente textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #e6edf8;
+  border-radius: 0.65rem;
+  background: #fff;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+#modalCliente textarea { min-height: 96px; resize: vertical; }
+
+/* Botones del modal: ordenados y centrados; Cancelar será rojo según petición */
+#modalCliente .flex.justify-end { justify-content: center; align-items: center; gap: 1rem; margin-top: 0.6rem; }
+#btnCancelarCliente {
+  padding: 0.7rem 1.5rem;
+  min-width: 160px;
+  border-radius: 0.75rem;
+  background: #ef4444; /* rojo */
+  color: #fff;
+  border: none;
+  box-shadow: 0 8px 20px rgba(239,68,68,0.12);
+  font-weight: 600;
+}
+#btnCancelarCliente:hover { background: #dc2626; }
+#btnGuardarCliente {
+  padding: 0.7rem 1.5rem;
+  min-width: 160px;
+  border-radius: 0.75rem;
+  background: #1e40af; /* azul profundo */
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(30,64,175,0.16);
+  border: none;
+  font-weight: 600;
+}
+#btnGuardarCliente:hover { background: #1740a0; }
+
+/* Ajustes de espaciado dentro del formulario para evitar que se vea demasiado ancho */
+#modalCliente .space-y-4 > div { margin-bottom: 0.65rem; }
+
+@media (max-width: 480px) {
+  #modalCliente .bg-white { width: 92%; padding: 0.85rem; }
+  #modalCliente h3#modalTitulo { font-size: 1.1rem; text-align: center; }
+  #btnCancelarCliente, #btnGuardarCliente { min-width: 44%; }
+}
+
+/* Animación de entrada para el dialog */
+.modal-enter {
+  transform: translateY(-8px) scale(0.98);
+  opacity: 0;
+}
+.modal-enter-active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition: transform 180ms ease-out, opacity 180ms ease-out;
+}
+.modal-leave-active {
+  transform: translateY(-8px) scale(0.98);
+  opacity: 0;
+  transition: transform 150ms ease-in, opacity 150ms ease-in;
+}
+
+/* --- Animaciones de cambio de sección (más llamativas) --- */
+.seccion { will-change: opacity, transform; }
+.section-enter { opacity: 0; transform: translateY(6px) scale(0.992); }
+.section-enter.section-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-leave-active {
+  opacity: 0;
+  transform: translateY(-4px) scale(0.995);
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modal de confirmación eliminar mascota */
+#modalConfirm { display: none; }
+#modalConfirm.items-center { display: flex; }
+#modalConfirm .bg-white { max-height: 90vh; }
+
+/* padding auxiliar para modalConfirm */
+#modalConfirm .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+#modalConfirm h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+#modalConfirm p {
+  text-align: center;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+#modalConfirm .flex.justify-end {
+  justify-content: center; /* centrar los botones */
+  gap: 1rem;
+}
+
+#btnConfirmarEliminar { box-shadow: 0 6px 18px rgba(220,38,38,0.12); }
+#btnCancelarEliminar { box-shadow: 0 6px 18px rgba(100,116,139,0.06); }
+
+@media (max-width: 480px) {
+  #modalConfirm .bg-white { width: 92%; }
+}
+
+/* ----- Modal Diagnóstico: diseño compacto y centrado ----- */
+#modalDiagnostico { display: none; }
+#modalDiagnostico.items-center { display: flex; }
+#modalDiagnostico .bg-white {
+  max-height: 86vh;
+  width: 420px; /* ancho aún más compacto */
+  max-width: 88%;
+  padding: 0.6rem 0.8rem; /* padding aún más reducido */
+  border-radius: 0.55rem;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.09);
+  overflow: hidden;
+}
+
+#modalDiagnostico .dialog-content {
+  max-height: 72vh; /* espacio para cabeceras y botones */
+  overflow-y: auto;
+  padding-right: 0.5rem; /* para espacio cuando aparece scrollbar */
+}
+
+#modalDiagnostico h3, #modalDiagnostico h2 {
+  text-align: center;
+  margin: 0 0 0.3rem 0;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+#modalDiagnostico p.modal-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+/* Formularios dentro del modal: campos más compactos */
+#modalDiagnostico label { display: block; font-weight: 600; margin-bottom: 0.18rem; font-size: 0.82rem; }
+#modalDiagnostico input[type="text"],
+#modalDiagnostico input[type="date"],
+#modalDiagnostico select,
+#modalDiagnostico textarea {
+  width: 100%;
+  padding: 0.32rem 0.45rem;
+  border: 1px solid #e6edf8;
+  border-radius: 0.45rem;
+  font-size: 0.9rem;
+  color: #0f172a;
+  box-sizing: border-box;
+}
+
+#modalDiagnostico textarea { min-height: 70px; resize: vertical; }
+
+/* Footer del modal: botones centrados y compactos */
+#modalDiagnostico .modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(15,23,42,0.02);
+}
+
+#modalDiagnostico .btn {
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+}
+
+/* clases de botón más específicas para mantener consistencia */
+.btn-primary { background: #6d28d9; color: #fff; box-shadow: 0 8px 20px rgba(99,102,241,0.12); }
+.btn-primary:hover { background: #5b21b6; }
+.btn-ghost { background: #f3f4f6; color: #111827; box-shadow: 0 6px 18px rgba(100,116,139,0.06); }
+
+/* clase para confirmar guardar en verde (opcional) */
+.btn-success { background: #10b981; color: #fff; box-shadow: 0 8px 20px rgba(16,185,129,0.12); }
+.btn-success:hover { background: #059669; }
+
+/* botón peligro / cancelar en rojo */
+.btn-danger { background: #ef4444; color: #fff; box-shadow: 0 8px 20px rgba(239,68,68,0.12); }
+.btn-danger:hover { background: #dc2626; }
+
+/* Ajustes responsive: en móviles el modal usa casi todo el ancho y el contenido hace scroll */
+@media (max-width: 640px) {
+  #modalDiagnostico .bg-white { width: 96%; padding: 0.8rem; }
+  #modalDiagnostico .dialog-content { max-height: 70vh; }
+  #modalDiagnostico textarea { min-height: 80px; }
+  #modalDiagnostico h3 { font-size: 1rem; }
+}
+
+/* Reduce espaciado entre campos para evitar 'taco' en pantallas pequeñas */
+#modalDiagnostico .form-row { margin-bottom: 0.55rem; }
+
+
 

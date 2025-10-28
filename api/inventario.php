@@ -3,6 +3,14 @@ require_once 'conexion.php';
 $metodo = $_SERVER['REQUEST_METHOD'];
 
 if ($metodo === 'GET') {
+    // Si se solicita solo las categorías disponibles
+    if (isset($_GET['categorias'])) {
+        $stmt = $conexion->query("SELECT DISTINCT categoria FROM inventario ORDER BY categoria ASC");
+        $cats = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        echo json_encode($cats);
+        exit;
+    }
+
     $stmt = $conexion->query("SELECT * FROM inventario ORDER BY id DESC");
     echo json_encode($stmt->fetchAll());
 }

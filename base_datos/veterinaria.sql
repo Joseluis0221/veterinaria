@@ -55,8 +55,6 @@ CREATE TABLE inventario (
   precio DECIMAL(10,2) DEFAULT 0.00
 );
 
-INSERT INTO usuarios (nombre, correo, contrasena) VALUES
-('Administrador', 'admin@veterinaria.local', SHA2('password123',256));
 
 INSERT INTO clientes (nombre, telefono, documento, direccion) VALUES
 ('Ana García','555-0123','12345678','Calle Principal 123'),

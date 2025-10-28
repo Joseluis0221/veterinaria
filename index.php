@@ -15,7 +15,8 @@ if (!empty($_SESSION['usuario_id'])) {
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center">
   <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-    <h1 class="text-2xl font-bold text-center mb-6 text-blue-700">Centro Veterinario Matiz</h1>
+    <h1 class="text-2xl font-bold text-center mb-6 text-black">VETERINARIA MATIZ</h1>
+
 
     <div id="loginForm">
       <h2 class="text-xl font-semibold mb-4">Iniciar Sesión</h2>
@@ -25,7 +26,6 @@ if (!empty($_SESSION['usuario_id'])) {
       <p class="text-sm mt-3 text-center">¿No tienes cuenta? 
         <a href="#" class="text-blue-600" onclick="mostrarRegistro()">Regístrate</a>
       </p>
-      <p class="text-sm mt-2 text-center"><a href="#" class="text-gray-500 hover:text-blue-500">¿Olvidaste tu contraseña?</a></p>
     </div>
 
     <div id="registroForm" class="hidden">
